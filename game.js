@@ -1,3 +1,3 @@
 var Game = function () {
-	// Initialize game
+	// Initialize game !
 }
