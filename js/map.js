@@ -11,7 +11,7 @@ Map.prototype.generate = function (json) {
 
 Map.prototype.insertTile = function (i, j) {
 	if (map_j[i][j] > 0) {
-		this.loadImage(sprites_config.images[map_j[i][j]]).then(function(img) {
+		this.loadImage(sprites_config.tiles[map_j[i][j]].img).then(function(img) {
 			context.drawImage(img, j*sprites_config.width, i*sprites_config.height, sprites_config.width, sprites_config.height);
 		});
 	}
