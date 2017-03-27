@@ -4,34 +4,41 @@ var sprites_config = {
 		"1": {
 			"img":"grassCenter.png",
 			"lethal": false,
-			"traversable": false
+			"fixed": false,
+			"crossable": false
 		},
 		"2": {
 			"img":"grassMid.png",
 			"lethal": false,
-			"traversable": false
+			"fixed": false,
+			"crossable": false
 		},
 		"3": {
 			"img":"torch.png",
 			"lethal": false,
-			"traversable": false
+			"fixed": false,
+			"crossable": false
 		},
 		"4": {
 			"img":"tochLit.png",
 			"lethal": false,
-			"traversable": false
+			"fixed": false,
+			"crossable": false
 		},
 		"5": {
 			"img":"tochLit2.png",
 			"lethal": false,
-			"traversable": false
+			"fixed": false,
+			"crossable": false
 		},
 		"6": {
 			"img":"signExit",
 			"lethal": false,
-			"traversable": true
+			"fixed": false,
+			"crossable": true
 		}
 	},
 	"width": 70,
-	"height": 70
+	"height": 70,
+	"player": "tochLit.png"
 };

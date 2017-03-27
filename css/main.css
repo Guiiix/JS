@@ -6,13 +6,33 @@ h1
 	font-size: 5em;
 }
 
+#canvas_container
+{
+	width: 800px;
+	height: 560px;
+	margin: auto;
+	position: relative;
+	padding: 0px;
+	border: solid white 2px;
+}
+
+#game_container, #player_container
+{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	padding: 0px;
+}
+
 #game_container
 {
-	border: solid white 1px;
-	display: block;
-	margin: auto;
 	background-image: url("../img/back.png");
 	background-size: auto 560px;
+}
+
+#player_container
+{
+	
 }
 
 body

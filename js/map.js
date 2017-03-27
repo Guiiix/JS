@@ -1,44 +1,23 @@
 var Map = function (json) {
+	this.tiles = {};
 	console.log("Initializing map");
 	this.generate(json);
 };
 
 Map.prototype.generate = function (json) {
 	console.log("Parsing map");
-	console.log(json);
-	this.insertTile(0,0);
+	for (var i in json) {
+		this.tiles[i] = {};
+		for (var j in json[i]) {
+			if (json[i][j] > 0) {
+				this.tiles[i][j] = new Tile(j*sprites_config.width, 
+					i*sprites_config.height, 
+					sprites_config.tiles[json[i][j]].crossable,
+					sprites_config.tiles[json[i][j]].fixed,
+					sprites_config.tiles[json[i][j]].lethal,
+					sprites_config.tiles[json[i][j]].img);
+				this.tiles[i][j].draw();
+			}
+		}
+	}
 };
-
-Map.prototype.insertTile = function (i, j) {
-	if (map_j[i][j] > 0) {
-		this.loadImage(sprites_config.tiles[map_j[i][j]].img).then(function(img) {
-			context.drawImage(img, j*sprites_config.width, i*sprites_config.height, sprites_config.width, sprites_config.height);
-		});
-	}
-
-	if (j == map_j[i].length-1) {
-		if (i == map_j.length-1) {
-			console.log("Map loaded");
-		} else {
-			this.insertTile(i+1, 0);
-		}
-	}
-
-	else {
-		this.insertTile(i, j+1);
-	}
-}
-
-Map.prototype.loadImage = function (name) {
-	console.log("Loading image " + name);
-	return new Promise ((ok, error) => {
-		var img = new Image();
-		img.src = sprites_config.folder + '/' + name;
-		img.onload = function() {
-			ok(img);
-		};
-		img.onerror = function() {
-			error(img);
-		}
-	});
-}

@@ -2,6 +2,8 @@
 <html>
 <head>
 	<title>SuperFire</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
 	<script type="text/javascript" src="conf/map.json"></script>
 	<script type="text/javascript" src="conf/sprites.json"></script>
@@ -10,10 +12,13 @@
 	<script type="text/javascript" src="js/map.js"></script>
 	<script type="text/javascript" src="js/game.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	
 </head>
 <body>
 	<h1>SuperFire</h1>
-	<canvas id="game_container" width="800" height="560"></canvas>
+	<div id="canvas_container">
+		<canvas id="game_container" width="800" height="560"></canvas><!--
+		--><canvas id="player_container" width="800" height="560"></canvas>
+	</div>
 </body>
 </html>
