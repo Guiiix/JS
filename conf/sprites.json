@@ -1,0 +1,13 @@
+var sprites_config = {
+	"folder": "img/tiles",
+	"images": {
+		"1": "grassCenter.png",
+		"2": "grassMid.png",
+		"3": "torch.png",
+		"4": "torchLit.png",
+		"5": "torchLit2.png",
+		"6": "signExit"
+	},
+	"width": 70,
+	"height": 70
+};

@@ -1,0 +1,29 @@
+h1
+{
+	font-family: "chlorinapregular", Arial;
+	text-align: center;
+	color: #cc0000;
+	font-size: 5em;
+}
+
+#game_container
+{
+	border: solid white 1px;
+	display: block;
+	margin: auto;
+	background-image: url("../img/back.png");
+	background-size: auto 560px;
+}
+
+body
+{
+	background-image: url("../img/web_pat.jpg");
+}
+
+@font-face {
+    font-family: 'chlorinapregular';
+    src: url('../fonts/chlorinp-webfont.woff2') format('woff2'),
+         url('../fonts/chlorinp-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+

@@ -4,4 +4,4 @@ var Tile = function (c, f, l, s) {
 	this.lethal = l;
 	this.sprite = s;
 	// Initialize tile
-}
+};
