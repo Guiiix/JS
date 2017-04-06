@@ -1,11 +1,8 @@
-var Game = function (map) {
-	this.sprites_config = sprites_config;
+var Game = function () {
 	this.gravity = 2;
 	this.frames = 0;
 	this.game_canvas = document.getElementById('game_container');
 	this.player_canvas = document.getElementById('player_container');
-	this.map = new Map(this);
-	this.player = new Player(this, 0, 0, sprites_config.player.img_r, sprites_config.player.img_l, sprites_config.player.width, sprites_config.player.height);	
 	this.keys = {
 		"ArrowRight": false,
 		"ArrowLeft": false,
@@ -13,15 +10,31 @@ var Game = function (map) {
 	};
 };
 
-Game.prototype.load = function () {
-	var _this = this;
+Game.prototype.loadConfig = function () {
+	return new Promise ( (resolve) => {
+		$.getJSON( 'conf/sprites.json', function (data) {
+			resolve(data);
+		});
+	});
+}
 
-	this.map.load(map_j)
-	.then( () => {
-		_this.player.load()
+Game.prototype.load = function () {
+	
+	var _this = this;
+	this.loadConfig()
+	.then( (sprites) => {
+		_this.sprites_config = sprites;
+		_this.map = new Map(_this);
+		_this.player = new Player(_this, 0, 0, _this.sprites_config.player.img_r, _this.sprites_config.player.img_l, _this.sprites_config.player.width, _this.sprites_config.player.height);	
 	})
 	.then( () => {
-		_this.start();
+		return _this.map.load();
+	})
+	.then( () => {
+		return _this.player.load();
+	})
+	.then( () => {
+		return _this.start();
 	});
 }
 

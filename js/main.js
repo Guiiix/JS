@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	g = new Game(map_j);
+	g = new Game();
 	g.load();
 
 	document.onkeydown = function(e) {

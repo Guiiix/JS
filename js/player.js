@@ -19,13 +19,11 @@ var Player = function (g, x, y, img_r, img_l, w, h) {
 
 Player.prototype.load = function() {
 	var _this = this;
-	return new Promise((ok) => {		
+	return new Promise((ok) => {
 		_this.loadImage(_this.img_r)
 		.then( (res) => {
 			_this.img_r = res;
 			_this.img = res;
-		})
-		.then( () => {
 			return _this.loadImage(_this.img_l);
 		})
 		.then( (res) => {

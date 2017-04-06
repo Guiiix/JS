@@ -1,4 +1,4 @@
-var sprites_config = {
+{
 	"folder": "img/tiles",
 	"tiles": {
 		"1": {
@@ -52,4 +52,4 @@ var sprites_config = {
 		"width" : 40,
 		"height" : 80
 	}
-};
+}
