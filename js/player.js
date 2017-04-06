@@ -1,49 +1,51 @@
-var Player = function (x, y, img_r, img_l, w, h) {
+var Player = function (g, x, y, img_r, img_l, w, h) {
+	this.game = g;
+	this.x = x;
+	this.y = y;
+	this.width = w;
+	this.height = h;
+	this.img_r = img_r;
+	this.img_l = img_l;
+
+	this.movement_y = true;
+	this.movement_x = true;
+	this.speed_x = 0;
+	this.speed_y = 0;
+
+	this.jump_acceleration = 25;
+	this._horizontal_acceleration = 5;
+	this.horizontal_acceleration = this._horizontal_acceleration;
+};
+
+Player.prototype.load = function() {
 	var _this = this;
-	return new Promise((ok, error) => {
-		_this.x = x;
-		_this.y = y;
-		_this.width = w;
-		_this.height = h;
-
-		_this.speed_x = 0;
-		_this.speed_y = 0;
-		_this.gravity = 2;
-		_this.movement_y = true;
-		_this.movement_x = true;
-
-		// CONST
-		_this.jump_acceleration = 25;
-		_this._horizontal_acceleration = 5;
-		_this.horizontal_acceleration = _this._horizontal_acceleration;
-
-		
-		_this.loadImage(img_r)
-		.then(function(res){
+	return new Promise((ok) => {		
+		_this.loadImage(_this.img_r)
+		.then( (res) => {
 			_this.img_r = res;
 			_this.img = res;
 		})
-		.then(function() {
-			return _this.loadImage(img_l);
+		.then( () => {
+			return _this.loadImage(_this.img_l);
 		})
-		.then(function(res) {
+		.then( (res) => {
 			_this.img_l = res;
 			_this.draw();
-			ok(_this);
+			ok();
 		});
 	});
-	
-};
+}
 
 Player.prototype.draw = function() {
-	player_context.clearRect(0, 0, player_canvas.width, player_canvas.height);
+	var player_context = this.game.player_canvas.getContext('2d');
+	player_context.clearRect(0, 0, this.game.player_canvas.width, this.game.player_canvas.height);
 	player_context.drawImage(this.img, this.x, this.y, this.width, this.height);
 }
 
 Player.prototype.loadImage = function (name) {
 	return new Promise ((ok, error) => {
 		var img = new Image();
-		img.src = sprites_config.folder + '/' + name;
+		img.src = this.game.sprites_config.folder + '/' + name;
 		img.onload = function() {
 			ok(img);
 		};
@@ -53,8 +55,8 @@ Player.prototype.loadImage = function (name) {
 	});
 };
 
-Player.prototype.update = function (game) {
-	this.move(game)
+Player.prototype.update = function () {
+	this.move();
 	this.draw();
 };
 
@@ -90,9 +92,9 @@ Player.prototype.walk = function () {
 	this.horizontal_acceleration = this._horizontal_acceleration;
 }
 
-Player.prototype.move = function (game) {
+Player.prototype.move = function () {
 	if (this.movement_y) {
-		this.speed_y -= this.gravity;
+		this.speed_y -= this.game.gravity;
 		if (this.speed_y > 40)
 			this.speed_y = 40;
 		if (this.speed_y < -40)
@@ -108,34 +110,34 @@ Player.prototype.move = function (game) {
 		this.x = 0;
 	}
 	
-	this.collisions(game);
+	this.collisions();
 };
 
-Player.prototype.collisions = function (game) {
+Player.prototype.collisions = function () {
 	// Mouvement vers la droite
 	if (this.speed_x > 0) {
-		if (this.checkCollision(game, this.x + this.width, this.y) ||
-			this.checkCollision(game, this.x + this.width, this.y + this.height-1)) {
+		if (this.checkCollision(this.x + this.width, this.y) ||
+			this.checkCollision(this.x + this.width, this.y + this.height-1)) {
 			this.speed_x = 0;
-			this.x -= (this.x + this.width) % game.sprites_config.width + this.horizontal_acceleration;
+			this.x -= (this.x + this.width) % this.game.sprites_config.width + this.horizontal_acceleration;
 		}
 	}
 
 	// Mouvement vers la gauche
 	else if (this.speed_x < 0) {
-		if (this.checkCollision(game, this.x, this.y) || 
-			this.checkCollision(game, this.x, this.y + this.height-1)) {
+		if (this.checkCollision(this.x, this.y) || 
+			this.checkCollision(this.x, this.y + this.height-1)) {
 			this.speed_x = 0;
-			this.x -= (this.x % game.sprites_config.width) - game.sprites_config.width;
+			this.x -= (this.x % this.game.sprites_config.width) - this.game.sprites_config.width;
 		}
 	}
 
 	// Mouvement vers le haut
 	if (this.speed_y > 0) {
-		if (this.checkCollision(game, this.x, this.y) ||
-			this.checkCollision(game, this.x + this.width, this.y)) {
+		if (this.checkCollision(this.x, this.y) ||
+			this.checkCollision(this.x + this.width, this.y)) {
 				this.speed_y = 0;
-				this.y -= (this.y % game.sprites_config.height) - game.sprites_config.height;
+				this.y -= (this.y % this.game.sprites_config.height) - this.game.sprites_config.height;
 		}
 
 		else {
@@ -143,11 +145,11 @@ Player.prototype.collisions = function (game) {
 		}
 	}
 
-	if (this.checkCollision(game, this.x, this.y + this.height) ||
-		this.checkCollision(game, this.x + this.width, this.y + this.height)) {
+	if (this.checkCollision(this.x, this.y + this.height) ||
+		this.checkCollision(this.x + this.width, this.y + this.height)) {
 		this.speed_y = 0;
 		this.movement_y = false;
-		this.y -= (this.y + this.height) % game.sprites_config.height;
+		this.y -= (this.y + this.height) % this.game.sprites_config.height;
 
 	}
 
@@ -158,14 +160,18 @@ Player.prototype.collisions = function (game) {
 	
 }
 
-Player.prototype.checkCollision = function (game, x, y) {
-	var tile = game.map.tiles[parseInt(y / game.sprites_config.height)][parseInt(x / game.sprites_config.width)];
-	if (tile != undefined) {
-		if (tile.lethal) this.die();
-		if (!tile.crossable) {
-			return true;
+Player.prototype.checkCollision = function (x, y) {
+	var line = this.game.map.tiles[parseInt(y / this.game.sprites_config.height)];
+	if (line != undefined) {
+		var tile = this.game.map.tiles[parseInt(y / this.game.sprites_config.height)][parseInt(x / this.game.sprites_config.width)];
+		if (tile != undefined) {
+			if (tile.lethal) this.die();
+			if (!tile.crossable) {
+				return true;
+			}
 		}
 	}
+	
 	return false;
 }
 

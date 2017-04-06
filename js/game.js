@@ -1,21 +1,29 @@
 var Game = function (map) {
-	this.map = new Map(map);
 	this.sprites_config = sprites_config;
+	this.gravity = 2;
 	this.frames = 0;
-
-	var _this = this;
-	new Player(0, 0, sprites_config.player.img_r, sprites_config.player.img_l, sprites_config.player.width, sprites_config.player.height)
-	.then(function(res) {
-		_this.player = res;
-		_this.keys = {
-			"ArrowRight": false,
-			"ArrowLeft": false,
-			"Space": false
-		}
-		g.start();
-	});
-	
+	this.game_canvas = document.getElementById('game_container');
+	this.player_canvas = document.getElementById('player_container');
+	this.map = new Map(this);
+	this.player = new Player(this, 0, 0, sprites_config.player.img_r, sprites_config.player.img_l, sprites_config.player.width, sprites_config.player.height);	
+	this.keys = {
+		"ArrowRight": false,
+		"ArrowLeft": false,
+		"Space": false
+	};
 };
+
+Game.prototype.load = function () {
+	var _this = this;
+
+	this.map.load(map_j)
+	.then( () => {
+		_this.player.load()
+	})
+	.then( () => {
+		_this.start();
+	});
+}
 
 Game.prototype.start = function() {
 	console.log("Starting game...");

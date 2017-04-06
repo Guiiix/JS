@@ -1,4 +1,5 @@
-var Tile = function (x, y, c, f, l, i) {
+var Tile = function (g, x, y, c, f, l, i) {
+	this.game = g;
 	this.x = x;
 	this.y = y;
 	this.crossable = c;
@@ -8,16 +9,23 @@ var Tile = function (x, y, c, f, l, i) {
 };
 
 Tile.prototype.draw = function() {
+	var context = this.game.game_canvas.getContext('2d');
 	var _this = this;
-	this.loadImage(this.img).then(function(img) {
-		context.drawImage(img, _this.x, _this.y, sprites_config.width, sprites_config.height);
+
+	return new Promise ((ok) => {
+		this.loadImage(this.img).then(function(img) {
+			context.drawImage(img, _this.x, _this.y, _this.game.sprites_config.width, _this.game.sprites_config.height);
+			ok();
+		});
 	});
+	
+	
 };
 
 Tile.prototype.loadImage = function (name) {
 	return new Promise ((ok, error) => {
 		var img = new Image();
-		img.src = sprites_config.folder + '/' + name;
+		img.src = this.game.sprites_config.folder + '/' + name;
 		img.onload = function() {
 			ok(img);
 		};

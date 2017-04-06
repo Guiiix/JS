@@ -1,23 +1,28 @@
-var Map = function (json) {
+var Map = function (game) {
 	this.tiles = {};
-	console.log("Initializing map");
-	this.generate(json);
+	this.game = game;
 };
 
-Map.prototype.generate = function (json) {
+Map.prototype.load = function (json) {
 	console.log("Parsing map");
-	for (var i in json) {
-		this.tiles[i] = {};
-		for (var j in json[i]) {
-			if (json[i][j] > 0) {
-				this.tiles[i][j] = new Tile(j*sprites_config.width, 
-					i*sprites_config.height, 
-					sprites_config.tiles[json[i][j]].crossable,
-					sprites_config.tiles[json[i][j]].fixed,
-					sprites_config.tiles[json[i][j]].lethal,
-					sprites_config.tiles[json[i][j]].img);
-				this.tiles[i][j].draw();
+	var promises = [];
+	return new Promise ((ok) => {
+		for (var i in json) {
+			this.tiles[i] = {};
+			for (var j in json[i]) {
+				if (json[i][j] > 0) {
+					this.tiles[i][j] = new Tile(this.game, j*this.game.sprites_config.width, 
+						i*this.game.sprites_config.height, 
+						this.game.sprites_config.tiles[json[i][j]].crossable,
+						this.game.sprites_config.tiles[json[i][j]].fixed,
+						this.game.sprites_config.tiles[json[i][j]].lethal,
+						this.game.sprites_config.tiles[json[i][j]].img);
+					promises.push(this.tiles[i][j].draw());
+				}
 			}
 		}
-	}
+		$.when.apply($, promises).then(function() {
+			ok();
+		});
+	});		
 };
