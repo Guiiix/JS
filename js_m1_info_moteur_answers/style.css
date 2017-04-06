@@ -1,0 +1,13 @@
+#canvas {
+    position: relative;
+    width: 1000px;
+    height: 600px;
+    border: 2px dashed black;
+    z-index:1;
+}
+
+.object {
+    position: absolute;
+    z-index:2;
+    background-color: black;
+}

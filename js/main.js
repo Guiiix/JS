@@ -6,5 +6,12 @@ $(document).ready(function() {
 	player_context = player_canvas.getContext('2d');
 	
 	g = new Game(map_j);
-	g.start();
+
+	document.onkeydown = function(e) {
+		g.press(e);
+	}
+
+	document.onkeyup = function(e) {
+		g.unpress(e);
+	}
 });

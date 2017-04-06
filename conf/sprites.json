@@ -21,9 +21,9 @@ var sprites_config = {
 		},
 		"4": {
 			"img":"tochLit.png",
-			"lethal": false,
+			"lethal": true,
 			"fixed": false,
-			"crossable": false
+			"crossable": true
 		},
 		"5": {
 			"img":"tochLit2.png",
@@ -36,9 +36,20 @@ var sprites_config = {
 			"lethal": false,
 			"fixed": false,
 			"crossable": true
+		},
+		"7": {
+			"img":"lava.png",
+			"lethal": true,
+			"fixed": false,
+			"crossable": false
 		}
 	},
-	"width": 70,
-	"height": 70,
-	"player": "tochLit.png"
+	"width": 40,
+	"height": 40,
+	"player": {
+		"img_r": "player.png",
+		"img_l": "player2.png",
+		"width" : 40,
+		"height" : 80
+	}
 };
