@@ -5,43 +5,59 @@
 			"img":"grassCenter.png",
 			"lethal": false,
 			"fixed": false,
-			"crossable": false
+			"crossable": false,
+			"win":false
 		},
 		"2": {
 			"img":"grassMid.png",
 			"lethal": false,
 			"fixed": false,
-			"crossable": false
+			"crossable": false,
+			"win":false
 		},
 		"3": {
-			"img":"torch.png",
-			"lethal": false,
-			"fixed": false,
-			"crossable": false
-		},
-		"4": {
 			"img":"tochLit.png",
 			"lethal": true,
+			"oneshot": false,
 			"fixed": false,
-			"crossable": true
+			"crossable": true,
+			"win":false
+		},
+		"4": {
+			"img":"signRight.png",
+			"lethal": false,
+			"fixed": false,
+			"crossable": true,
+			"win":false
 		},
 		"5": {
-			"img":"tochLit2.png",
+			"img":"signLeft.png",
 			"lethal": false,
 			"fixed": false,
-			"crossable": false
+			"crossable": true,
+			"win":false
 		},
 		"6": {
-			"img":"signExit",
+			"img":"signExit.png",
 			"lethal": false,
 			"fixed": false,
-			"crossable": true
+			"crossable": true,
+			"win":true
 		},
 		"7": {
 			"img":"lava.png",
 			"lethal": true,
+			"oneshot": true,
 			"fixed": false,
-			"crossable": false
+			"crossable": false,
+			"win":false
+		},
+		"8": {
+			"img":"castleCenter.png",
+			"lethal": false,
+			"fixed": false,
+			"crossable": false,
+			"win":false
 		}
 	},
 	"width": 40,

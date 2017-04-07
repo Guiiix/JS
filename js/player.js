@@ -15,6 +15,10 @@ var Player = function (g, x, y, img_r, img_l, w, h) {
 	this.jump_acceleration = 25;
 	this._horizontal_acceleration = 5;
 	this.horizontal_acceleration = this._horizontal_acceleration;
+	this._lifes = 3;
+	this.lifes = this._lifes;
+	this.refreshLifes();
+	this.immortal = false;
 };
 
 Player.prototype.load = function() {
@@ -55,7 +59,6 @@ Player.prototype.loadImage = function (name) {
 
 Player.prototype.update = function () {
 	this.move();
-	this.draw();
 };
 
 Player.prototype.jump = function () {
@@ -104,9 +107,9 @@ Player.prototype.move = function () {
 		this.x += this.speed_x;
 	}
 
-	if (this.x < 0) {
-		this.x = 0;
-	}
+	if (this.x < 0) this.x = 0;
+
+	if (this.x > this.game.map.width - this.width) this.x = this.game.map.width - this.width;
 	
 	this.collisions();
 };
@@ -154,19 +157,23 @@ Player.prototype.collisions = function () {
 	else {
 		this.movement_y = true;
 	}
-
-	
 }
 
 Player.prototype.checkCollision = function (x, y) {
-	var line = this.game.map.tiles[parseInt(y / this.game.sprites_config.height)];
+	var index_x = parseInt(y / this.game.sprites_config.height)
+	var index_y = parseInt(x / this.game.sprites_config.width);
+	var line = this.game.map.tiles[index_x];
 	if (line != undefined) {
-		var tile = this.game.map.tiles[parseInt(y / this.game.sprites_config.height)][parseInt(x / this.game.sprites_config.width)];
+		var tile = this.game.map.tiles[index_x][index_y];
 		if (tile != undefined) {
-			if (tile.lethal) this.die();
-			if (!tile.crossable) {
-				return true;
+			if (tile.lethal) {
+				if (tile.oneshot) this.die();
+				else this.hit();
 			}
+
+			if (tile.win) this.game.win();
+
+			if (!tile.crossable) return true;
 		}
 	}
 	
@@ -174,6 +181,31 @@ Player.prototype.checkCollision = function (x, y) {
 }
 
 Player.prototype.die = function () {
+	this.lifes = this._lifes;
+	this.refreshLifes();
 	this.x = 0;
 	this.y = 0;
+}
+
+Player.prototype.hit = function () {
+	if (!this.immortal) {
+		this.lifes--;
+		this.refreshLifes();
+		if (this.lifes == 0) {
+			this.die();
+		}
+		else {
+			this.immortal = true;
+			$("#hit_div").show();
+			var _this = this;
+			setTimeout(function() {
+				$("#hit_div").hide();
+				_this.immortal = false;
+			}, 2000);
+		}
+	}
+}
+
+Player.prototype.refreshLifes = function () {
+	$("#lifes").html(this.lifes);
 }

@@ -15,10 +15,15 @@
 <body>
 	<h1>SuperFire</h1>
 	<div id="canvas_container">
-		<canvas id="game_container" width="800" height="560"></canvas><!--
-		--><canvas id="player_container" width="800" height="560"></canvas>
-		<p id="fps_p"><span id="fps"></span> FPS</p>
+		<div id="visible_area">
+			<canvas id="game_container"></canvas><!--
+			--><canvas id="player_container"></canvas>
+		</div>
+		<div id="hit_div"></div>
+		<p id="fps_p"><span id="fps">0</span> FPS</p>
+		<p id="lifes_p">LIFES : <span id="lifes"></span></p>
+		<div id="win_div"><p>YOU WIN</p></div>
 	</div>
-	
+<div style="height: 30px;"></div>
 </body>
 </html>

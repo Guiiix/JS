@@ -1,3 +1,7 @@
+html, body {
+	height: 100%
+}
+
 h1
 {
 	font-family: "chlorinapregular", Arial;
@@ -8,13 +12,27 @@ h1
 
 #canvas_container
 {
-	width: 800px;
-	height: 560px;
+	width: calc(100% - 30px);
+	height: 80%;
 	margin: auto;
 	position: relative;
 	padding: 0px;
 	border: solid white 2px;
+	overflow: hidden;
 }
+
+
+#hit_div
+{
+	position: absolute;
+	display: none;
+	top: 0px;
+	left:0px;
+	background-color: red;
+	opacity: 0.4;
+}
+
+
 
 #game_container, #player_container
 {
@@ -26,13 +44,15 @@ h1
 
 #game_container
 {
-	background-image: url("../img/back2.png");
+	background-image: url("../img/back3.png");
 	background-size: auto 560px;
 }
 
-#player_container
+#visible_area
 {
-	
+	position: absolute;
+	top:0px;
+	left: 0px;
 }
 
 body
@@ -46,6 +66,27 @@ body
 	bottom: 5px;
 	left: 5px;
 	color: white;
+}
+
+#lifes_p 
+{
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+	color: white;
+}
+
+#win_div
+{
+	background-color: green;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	font-size: 3em;
+	font-family: chlorinapregular, "Myriad Pro";
+	text-align: center;
+	display: none;
+	color:white;
 }
 
 

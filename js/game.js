@@ -31,6 +31,9 @@ Game.prototype.load = function () {
 		return _this.map.load();
 	})
 	.then( () => {
+		return _this.map.draw();
+	})
+	.then( () => {
 		return _this.player.load();
 	})
 	.then( () => {
@@ -43,7 +46,11 @@ Game.prototype.start = function() {
 	var game = this;
 	var id = setInterval(function() {
 		game.keysActions();
-		game.player.update(game);
+		game.player.update();
+	}, 1000/60);
+	setInterval(function() {
+		game.player.draw();
+		game.moveCamera();
 		this.frames++;
 	}, 1000/60);
 	setInterval(function() {
@@ -83,4 +90,33 @@ Game.prototype.keysActions = function () {
 
 	if (this.keys.Space) this.player.run();
 	else this.player.walk();
+};
+
+Game.prototype.moveCamera = function () {
+	var left = - (this.player.x - ($("#canvas_container").width() / 2));
+	var top = - (this.player.y - ($("#canvas_container").height() / 2));
+	var max_x = this.map.width - $("#canvas_container").width();
+	var max_y = this.map.height - $("#canvas_container").height();
+
+	if (left > 0)
+		left = 0;
+	
+	if (top > 0)
+		top = 0;
+	
+	if (left < -max_x)
+		left = -max_x;
+
+	if (top < -max_y)
+		top = -max_y;
+
+	$("#visible_area").css('left', left);
+	$("#visible_area").css('top', top);
+};
+
+Game.prototype.win = function () {
+	$("#win_div").width($("#canvas_container").width());
+	$("#win_div").height($("#canvas_container").height());
+	$("#win_div p").css("line-height", $("#canvas_container").height() + "px");
+	$("#win_div").show();
 };

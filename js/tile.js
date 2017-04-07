@@ -1,4 +1,4 @@
-var Tile = function (g, x, y, c, f, l, i) {
+var Tile = function (g, x, y, c, f, l, i, w, os) {
 	this.game = g;
 	this.x = x;
 	this.y = y;
@@ -6,6 +6,9 @@ var Tile = function (g, x, y, c, f, l, i) {
 	this.fixed = f;
 	this.lethal = l;
 	this.img = i;
+	this.win = w;
+	if (this.lethal)
+		this.oneshot = os;
 };
 
 Tile.prototype.draw = function() {
