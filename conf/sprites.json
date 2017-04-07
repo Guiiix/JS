@@ -1,19 +1,35 @@
 {
 	"folder": "img/tiles",
 	"tiles": {
+		"0": {
+			"img":"air.png",
+			"lethal": false,
+			"fixed": false,
+			"crossable": true,
+			"win":false,
+			"special": false,
+			"function": "",
+			"oneshot": false
+		},
 		"1": {
 			"img":"grassCenter.png",
 			"lethal": false,
 			"fixed": false,
 			"crossable": false,
-			"win":false
+			"win":false,
+			"special": false,
+			"function": "",
+			"oneshot": false
 		},
 		"2": {
 			"img":"grassMid.png",
 			"lethal": false,
 			"fixed": false,
 			"crossable": false,
-			"win":false
+			"win":false,
+			"special": false,
+			"function": "",
+			"oneshot": false
 		},
 		"3": {
 			"img":"tochLit.png",
@@ -21,28 +37,40 @@
 			"oneshot": false,
 			"fixed": false,
 			"crossable": true,
-			"win":false
+			"win":false,
+			"special": false,
+			"function": "",
+			"oneshot": false
 		},
 		"4": {
 			"img":"signRight.png",
 			"lethal": false,
 			"fixed": false,
 			"crossable": true,
-			"win":false
+			"win":false,
+			"special": false,
+			"function": "",
+			"oneshot": false
 		},
 		"5": {
 			"img":"signLeft.png",
 			"lethal": false,
 			"fixed": false,
 			"crossable": true,
-			"win":false
+			"win":false,
+			"special": false,
+			"function": "",
+			"oneshot": false
 		},
 		"6": {
 			"img":"signExit.png",
 			"lethal": false,
 			"fixed": false,
 			"crossable": true,
-			"win":true
+			"win":true,
+			"special": false,
+			"function": "",
+			"oneshot": false
 		},
 		"7": {
 			"img":"lava.png",
@@ -50,14 +78,29 @@
 			"oneshot": true,
 			"fixed": false,
 			"crossable": false,
-			"win":false
+			"win":false,
+			"special": false,
+			"function": ""
 		},
 		"8": {
 			"img":"castleCenter.png",
 			"lethal": false,
 			"fixed": false,
 			"crossable": false,
-			"win":false
+			"win":false,
+			"special": false,
+			"function": "",
+			"oneshot": false
+		},
+		"9": {
+			"img": "spring.png",
+			"lethal": false,
+			"fixed": false,
+			"crossable": true,
+			"win": false,
+			"special": true,
+			"function": "bounce",
+			"oneshot": false
 		}
 	},
 	"width": 40,

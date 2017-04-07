@@ -9,7 +9,7 @@ Map.prototype.load = function () {
 		for (var i in json) {
 			this.tiles[i] = {};
 			for (var j in json[i]) {
-				if (json[i][j] > 0) {
+				if (json[i][j] >= 0) {
 					this.tiles[i][j] = new Tile(this.game, j*this.game.sprites_config.width, 
 						i*this.game.sprites_config.height, 
 						this.game.sprites_config.tiles[json[i][j]].crossable,
@@ -17,7 +17,10 @@ Map.prototype.load = function () {
 						this.game.sprites_config.tiles[json[i][j]].lethal,
 						this.game.sprites_config.tiles[json[i][j]].img,
 						this.game.sprites_config.tiles[json[i][j]].win,
-						this.game.sprites_config.tiles[json[i][j]].oneshot);
+						this.game.sprites_config.tiles[json[i][j]].special,
+						this.game.sprites_config.tiles[json[i][j]].oneshot,
+						this.game.sprites_config.tiles[json[i][j]].function
+						);
 				}
 			}
 		}

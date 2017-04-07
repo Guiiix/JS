@@ -12,7 +12,9 @@ var Player = function (g, x, y, img_r, img_l, w, h) {
 	this.speed_x = 0;
 	this.speed_y = 0;
 
-	this.jump_acceleration = 25;
+	this._jump_acceleration = 25;
+	this.jump_acceleration = this._jump_acceleration;
+
 	this._horizontal_acceleration = 5;
 	this.horizontal_acceleration = this._horizontal_acceleration;
 	this._lifes = 3;
@@ -94,6 +96,7 @@ Player.prototype.walk = function () {
 }
 
 Player.prototype.move = function () {
+	console.log(this.movement_y);
 	if (this.movement_y) {
 		this.speed_y -= this.game.gravity;
 		if (this.speed_y > 40)
@@ -172,8 +175,15 @@ Player.prototype.checkCollision = function (x, y) {
 			}
 
 			if (tile.win) this.game.win();
+			if (tile.special) {
+				tile.fun();
+			}
 
-			if (!tile.crossable) return true;
+			if (!tile.crossable){
+				console.log("collision");
+				console.log(tile);
+				return true;
+			}
 		}
 	}
 	
