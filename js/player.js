@@ -96,7 +96,6 @@ Player.prototype.walk = function () {
 }
 
 Player.prototype.move = function () {
-	console.log(this.movement_y);
 	if (this.movement_y) {
 		this.speed_y -= this.game.gravity;
 		if (this.speed_y > 40)
@@ -175,13 +174,14 @@ Player.prototype.checkCollision = function (x, y) {
 			}
 
 			if (tile.win) this.game.win();
+			
 			if (tile.special) {
 				tile.fun();
 			}
 
+			if (!tile.fixed) tile.break();
+
 			if (!tile.crossable){
-				console.log("collision");
-				console.log(tile);
 				return true;
 			}
 		}
@@ -195,6 +195,11 @@ Player.prototype.die = function () {
 	this.refreshLifes();
 	this.x = 0;
 	this.y = 0;
+
+	$("#dead_div").width($("#canvas_container").width());
+	$("#dead_div").height($("#canvas_container").height());
+	$("#dead_div p").css("line-height", $("#canvas_container").height() + "px");
+	$("#dead_div").show();
 }
 
 Player.prototype.hit = function () {
@@ -214,6 +219,11 @@ Player.prototype.hit = function () {
 			}, 2000);
 		}
 	}
+}
+
+Player.prototype.heal = function () {
+	this.lifes++;
+	this.refreshLifes();
 }
 
 Player.prototype.refreshLifes = function () {

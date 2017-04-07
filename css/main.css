@@ -76,9 +76,8 @@ body
 	color: white;
 }
 
-#win_div
+#win_div, #dead_div
 {
-	background-color: green;
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -89,6 +88,15 @@ body
 	color:white;
 }
 
+#win_div
+{
+	background-color: green;
+}
+
+#dead_div
+{
+	background-color: red;
+}
 
 @font-face {
     font-family: 'chlorinapregular';

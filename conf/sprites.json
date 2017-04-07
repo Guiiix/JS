@@ -4,7 +4,7 @@
 		"0": {
 			"img":"air.png",
 			"lethal": false,
-			"fixed": false,
+			"fixed": true,
 			"crossable": true,
 			"win":false,
 			"special": false,
@@ -14,7 +14,7 @@
 		"1": {
 			"img":"grassCenter.png",
 			"lethal": false,
-			"fixed": false,
+			"fixed": true,
 			"crossable": false,
 			"win":false,
 			"special": false,
@@ -24,7 +24,7 @@
 		"2": {
 			"img":"grassMid.png",
 			"lethal": false,
-			"fixed": false,
+			"fixed": true,
 			"crossable": false,
 			"win":false,
 			"special": false,
@@ -35,7 +35,7 @@
 			"img":"tochLit.png",
 			"lethal": true,
 			"oneshot": false,
-			"fixed": false,
+			"fixed": true,
 			"crossable": true,
 			"win":false,
 			"special": false,
@@ -45,7 +45,7 @@
 		"4": {
 			"img":"signRight.png",
 			"lethal": false,
-			"fixed": false,
+			"fixed": true,
 			"crossable": true,
 			"win":false,
 			"special": false,
@@ -55,7 +55,7 @@
 		"5": {
 			"img":"signLeft.png",
 			"lethal": false,
-			"fixed": false,
+			"fixed": true,
 			"crossable": true,
 			"win":false,
 			"special": false,
@@ -65,7 +65,7 @@
 		"6": {
 			"img":"signExit.png",
 			"lethal": false,
-			"fixed": false,
+			"fixed": true,
 			"crossable": true,
 			"win":true,
 			"special": false,
@@ -76,7 +76,7 @@
 			"img":"lava.png",
 			"lethal": true,
 			"oneshot": true,
-			"fixed": false,
+			"fixed": true,
 			"crossable": false,
 			"win":false,
 			"special": false,
@@ -85,7 +85,7 @@
 		"8": {
 			"img":"castleCenter.png",
 			"lethal": false,
-			"fixed": false,
+			"fixed": true,
 			"crossable": false,
 			"win":false,
 			"special": false,
@@ -95,11 +95,21 @@
 		"9": {
 			"img": "spring.png",
 			"lethal": false,
-			"fixed": false,
+			"fixed": true,
 			"crossable": true,
 			"win": false,
 			"special": true,
 			"function": "bounce",
+			"oneshot": false
+		},
+		"10": {
+			"img": "life.png",
+			"lethal": false,
+			"fixed": false,
+			"crossable": true,
+			"win": false,
+			"special": true,
+			"function": "heal",
 			"oneshot": false
 		}
 	},
@@ -109,6 +119,6 @@
 		"img_r": "player.png",
 		"img_l": "player2.png",
 		"width" : 40,
-		"height" : 80
+		"height" : 40
 	}
 }

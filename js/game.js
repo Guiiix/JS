@@ -43,7 +43,6 @@ Game.prototype.load = function () {
 
 Game.prototype.start = function() {
 	console.log("Starting game...");
-	console.log(this.map.tiles);
 	var game = this;
 	var id = setInterval(function() {
 		game.keysActions();
@@ -77,10 +76,6 @@ Game.prototype.unpress = function (e) {
 Game.prototype.keysActions = function () {
 	if (this.keys.ArrowUp) {
 		this.player.jump();
-		/*if (!this.player.movement_y) {
-			this.movement_y = true;
-			this.player.speed_y = 9;
-		}*/
 	}
 
 	if (this.keys.ArrowRight || this.keys.ArrowLeft) {

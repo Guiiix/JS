@@ -22,9 +22,32 @@ Tile.prototype.draw = function() {
 			ok();
 		});
 	});
-	
-	
 };
+
+Tile.prototype.break = function () {
+	var index_x = this.y / this.game.sprites_config.height;
+	var index_y = this.x / this.game.sprites_config.width;
+
+	this.game.map.tiles[index_x][index_y] = new Tile(
+		this.game, this.x,
+		this.y, 
+		this.game.sprites_config.tiles[0].crossable,
+		this.game.sprites_config.tiles[0].fixed,
+		this.game.sprites_config.tiles[0].lethal,
+		this.game.sprites_config.tiles[0].img,
+		this.game.sprites_config.tiles[0].win,
+		this.game.sprites_config.tiles[0].special,
+		this.game.sprites_config.tiles[0].oneshot,
+		this.game.sprites_config.tiles[0].function
+	);
+	this.clear();
+	//this.game.map.draw();
+}
+
+Tile.prototype.clear = function () {
+	var context = this.game.game_canvas.getContext('2d');
+	context.clearRect(this.x, this.y, this.game.sprites_config.width, this.game.sprites_config.height);
+}
 
 Tile.prototype.loadImage = function (name) {
 	return new Promise ((ok, error) => {
@@ -47,4 +70,8 @@ Tile.prototype.bounce = function () {
 		this.game.player.jump();
 		this.game.player.jump_acceleration = this.game.player._jump_acceleration;
 	}
+}
+
+Tile.prototype.heal = function () {
+	this.game.player.heal();
 }

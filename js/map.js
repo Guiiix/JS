@@ -34,6 +34,10 @@ Map.prototype.load = function () {
 		});
 		$("#hit_div").width(this.width).height(this.height);
 		$("#visible_area").width(this.width).height(this.height);
+		$("#canvas_container").css({
+			"max-width": this.width,
+			"max-height": this.height
+		})
 	});
 };
 
