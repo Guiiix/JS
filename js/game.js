@@ -10,6 +10,7 @@ var Game = function () {
 	};
 };
 
+/* Chargement de la configuration des tiles */
 Game.prototype.loadConfig = function () {
 	return new Promise ( (resolve) => {
 		$.getJSON( 'conf/sprites.json', function (data) {
@@ -18,6 +19,7 @@ Game.prototype.loadConfig = function () {
 	});
 }
 
+/* Chargement du jeu (conf, map, player) */
 Game.prototype.load = function () {
 	
 	var _this = this;
@@ -41,6 +43,7 @@ Game.prototype.load = function () {
 	});
 }
 
+/* Lancement des boucles du jeu */
 Game.prototype.start = function() {
 	console.log("Starting game...");
 	var game = this;
@@ -59,6 +62,7 @@ Game.prototype.start = function() {
 	}, 1000);
 };
 
+/* Mise à jour du tableau de touches */
 Game.prototype.press = function (e) {
 	if (e.code == "Space" || e.code == "ArrowUp" || e.code == "ArrowRight" || e.code == "ArrowLeft") {
 		this.keys[e.code] = true;
@@ -66,6 +70,7 @@ Game.prototype.press = function (e) {
 	}
 };
 
+/* Mise à jour du tableau de touches */
 Game.prototype.unpress = function (e) {
 	if (e.code == "Space" || e.code == "ArrowUp" || e.code == "ArrowRight" || e.code == "ArrowLeft") {
 		this.keys[e.code] = false;
@@ -73,6 +78,7 @@ Game.prototype.unpress = function (e) {
 	}
 };
 
+/* Actions relatives au touches */
 Game.prototype.keysActions = function () {
 	if (this.keys.ArrowUp) {
 		this.player.jump();
@@ -88,10 +94,18 @@ Game.prototype.keysActions = function () {
 	else this.player.walk();
 };
 
+/* Déplacement de la caméra */
 Game.prototype.moveCamera = function () {
+	/* Calcul de l'offset x pour centrer le joueur */
 	var left = - (this.player.x - ($("#canvas_container").width() / 2));
+
+	/* Calcul de l'offset y pour center le joueur */
 	var top = - (this.player.y - ($("#canvas_container").height() / 2));
+
+	/* Calcul de l'offset x max pour ne pas faire sortir la caméra de la zone de jeu */
 	var max_x = this.map.width - $("#canvas_container").width();
+
+	/* Calcul de l'offset y max pour ne pas faire sortir la caméra de la zone de jeu */
 	var max_y = this.map.height - $("#canvas_container").height();
 
 	if (left > 0)
@@ -106,13 +120,22 @@ Game.prototype.moveCamera = function () {
 	if (top < -max_y)
 		top = -max_y;
 
+	/* Mouvement de caméra */
 	$("#visible_area").css('left', left);
 	$("#visible_area").css('top', top);
 };
 
+/* Affichage de l'ecran de victoire */
 Game.prototype.win = function () {
 	$("#win_div").width($("#canvas_container").width());
 	$("#win_div").height($("#canvas_container").height());
 	$("#win_div p").css("line-height", $("#canvas_container").height() + "px");
 	$("#win_div").show();
 };
+
+Game.prototype.die = function () {
+	$("#dead_div").width($("#canvas_container").width());
+	$("#dead_div").height($("#canvas_container").height());
+	$("#dead_div p").css("line-height", $("#canvas_container").height() + "px");
+	$("#dead_div").show();
+}

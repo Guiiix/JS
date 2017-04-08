@@ -3,6 +3,7 @@ var Map = function (game) {
 	this.game = game;
 };
 
+/* Créer les instances de classe Tile en fonction du fichier map */
 Map.prototype.load = function () {
 	console.log("Parsing map");
 	return this.loadMapFile().then( (json) => {
@@ -41,6 +42,8 @@ Map.prototype.load = function () {
 	});
 };
 
+/* Dessine les images des blocs et renvoi une promesse qui sera résolue lorsque toutes les 
+images auront été dessinées */
 Map.prototype.draw = function () {
 	var promises = [];
 	new Promise ((ok) => {
@@ -55,7 +58,8 @@ Map.prototype.draw = function () {
 		});
 	});
 }
-
+	
+/* Charge le fichier map et renvoi une promesse */
 Map.prototype.loadMapFile = function () {
 	return new Promise ( (ok) => {
 		$.getJSON( 'conf/map.json', function (data) {
